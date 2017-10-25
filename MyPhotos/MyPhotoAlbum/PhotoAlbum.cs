@@ -33,6 +33,18 @@ namespace Manning.MyPhotoAlbum
             }
         }
 
+        public string GetDescriptorFormat()
+        {
+            switch (PhotoDescriptor)
+            {
+                case DescriptorOption.Caption: return "c";
+                case DescriptorOption.DateTaken: return "d";
+                case DescriptorOption.FileName:
+                default:
+                    return "f";
+            }
+        }
+
         private bool _hasChanged = false;
         public bool HasChanged
         {
@@ -41,7 +53,8 @@ namespace Manning.MyPhotoAlbum
                 if (_hasChanged)
                     return true;
                 foreach (Photograph p in this)
-                    return true;
+                    if (p.HasChanged)
+                        return true;
                 return false;
             }
             set

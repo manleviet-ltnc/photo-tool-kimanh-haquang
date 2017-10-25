@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 using Manning.MyPhotoAlbum;
+using System.Collections.Specialized;
 
 namespace Manning.MyPhotoControls
 {
@@ -52,13 +53,28 @@ namespace Manning.MyPhotoControls
 
         protected override void ResetDialog()
         {
+            // Fill combo box with photographers in album
+            cboPhotographer.BeginUpdate();
+            cboPhotographer.Items.Clear();
+
+            if (Manager != null)
+            {
+                StringCollection coll = Manager.Photographers;
+                foreach (string s in coll)
+                    cboPhotographer.Items.Add(s);
+            }
+            else
+                cboPhotographer.Items.Add(Photo.Photographer);
+
+            cboPhotographer.EndUpdate();
+
             Photograph photo = Photo;
             if (photo != null)
             {
                 txtPhotoFile.Text = photo.FileName;
                 txtCaption.Text = photo.Caption;
                 mskDateTaken.Text = photo.DateTaken.ToString();
-                txtPhotographer.Text = photo.Photographer;
+                cboPhotographer.Text = photo.Photographer;
                 txtNotes.Text = photo.Notes;
             }
         }
@@ -75,7 +91,7 @@ namespace Manning.MyPhotoControls
             if (photo != null)
             {
                 photo.Caption = txtCaption.Text;
-                photo.Photographer = txtPhotographer.Text;
+                photo.Photographer = cboPhotographer.Text;
                 photo.Notes = txtNotes.Text;
                 try
                 {
@@ -113,6 +129,13 @@ namespace Manning.MyPhotoControls
                                                       MessageBoxIcon.Question);
                 e.Cancel = (result == DialogResult.Yes);
             }
+        }
+
+        private void cboPhotographer_Leave(object sender, EventArgs e)
+        {
+            string person = cboPhotographer.Text;
+            if (!cboPhotographer.Items.Contains(person))
+                cboPhotographer.Items.Add(person);
         }
     }
 }

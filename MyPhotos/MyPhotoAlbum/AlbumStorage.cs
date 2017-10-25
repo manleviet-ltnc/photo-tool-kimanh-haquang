@@ -181,7 +181,7 @@ namespace Manning.MyPhotoAlbum
             return p;
         }
 
-        static public bool IsEncryted(string path)
+        static public bool IsEncrypted(string path)
         {
             StreamReader sr = null;
             try
