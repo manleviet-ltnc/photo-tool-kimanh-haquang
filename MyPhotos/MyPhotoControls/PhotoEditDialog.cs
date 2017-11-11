@@ -89,6 +89,8 @@ namespace Manning.MyPhotoControls
             Photograph photo = Photo;
             if (photo != null)
             {
+                Photo.BeginEdit();
+
                 photo.Caption = txtCaption.Text;
                 photo.Photographer = cboPhotographer.Text;
                 photo.Notes = txtNotes.Text;
@@ -97,6 +99,8 @@ namespace Manning.MyPhotoControls
                     photo.DateTaken = dtmDateTaken.Value;
                 }
                 catch (FormatException) { }
+
+                Photo.EndEdit();
             }
         }
 
