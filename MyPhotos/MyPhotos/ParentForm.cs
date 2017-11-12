@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using MyPhotos.Properties;
 using Manning.MyPhotoAlbum;
 using Manning.MyPhotoControls;
 
@@ -96,6 +97,11 @@ namespace MyPhotos
             PixelDialog.GlobalMdiParent = this;
 
             SetTitleBar();
+
+            string name = Settings.Default.LastAlbumPath;
+            if (!string.IsNullOrEmpty(name) && !AlbumStorage.IsEncrypted(name))
+                CreateMdiChild(new MainForm(name, null));
+
             base.OnLoad(e);
         }
 
@@ -117,10 +123,18 @@ namespace MyPhotos
             {
                 ToolStripManager.Merge(f.MainToolStrip, toolStripParent.Name);
                 toolStripParent.ImageList = f.MainToolStrip.ImageList;
+
+                Settings.Default.LastAlbumPath = f.AlbumPath;
             }
 
             SetTitleBar();
             base.OnMdiChildActivate(e);
+        }
+
+        protected override void OnFormClosing(FormClosingEventArgs e)
+        {
+            Settings.Default.Save();
+            base.OnFormClosing(e);
         }
 
         protected void SetTitleBar()

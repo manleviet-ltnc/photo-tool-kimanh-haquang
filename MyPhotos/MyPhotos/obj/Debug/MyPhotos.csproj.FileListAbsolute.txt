@@ -14,3 +14,4 @@ E:\Documents\Projects in Visual Studio\photo-tool-kimanh-haquang\MyPhotos\MyPhot
 E:\Documents\Projects in Visual Studio\photo-tool-kimanh-haquang\MyPhotos\MyPhotos\bin\Debug\MyPhotoControls.pdb
 E:\Documents\Projects in Visual Studio\photo-tool-kimanh-haquang\MyPhotos\MyPhotos\obj\Debug\MyPhotos.SlideShowDialog.resources
 E:\Documents\Projects in Visual Studio\photo-tool-kimanh-haquang\MyPhotos\MyPhotos\obj\Debug\MyPhotos.ParentForm.resources
+E:\Documents\Projects in Visual Studio\photo-tool-kimanh-haquang\MyPhotos\MyPhotos\obj\Debug\MyPhotos.AboutBox.resources
